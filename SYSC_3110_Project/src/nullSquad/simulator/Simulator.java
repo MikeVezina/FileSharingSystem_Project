@@ -118,12 +118,20 @@ public class Simulator
 				// Break if user enters no
 				if (start.equalsIgnoreCase("no") || start.equalsIgnoreCase("stop"))
 					break;
-
+				
+				int numSteps = 1;
+				
 				switch (start.toLowerCase())
 				{
 
 				// Continue the simulation
+					case "step":
+						numSteps = 1;
+						break;
+						
 					case "go":
+						System.out.println("How many steps would you like to simulate?: ");
+						numSteps = in.nextInt();
 						break;
 
 					// Print out all the stats
@@ -144,16 +152,16 @@ public class Simulator
 
 					// Any other input results in asking the user again
 					default:
-						System.out.println("Please Enter a Command (GO, STOP, STATS)");
+						System.out.println("Please Enter a Command (GO, STEP, STOP, STATS)");
 						start = in.next();
 
 						continue;
 
 				}
+				for(int i=0; i<numSteps; i++)
+					simulationStep();
 
-				simulationStep();
-
-				System.out.println("Please Enter a Command (GO, STOP, STATS):");
+				System.out.println("Please Enter a Command (GO, STEP, STOP, STATS):");
 				start = in.next();
 
 				System.out.println();
@@ -161,6 +169,7 @@ public class Simulator
 			}
 		}
 		System.out.println("Exiting...");
+		System.out.println("Simulation Halted.");
 	}
 
 	public static void main(String[] args)
